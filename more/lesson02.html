@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta charset="UTF-8">
+  <title>求文本框中所有数字的和</title>
+  <style type="text/css">
+
+  </style>
+
+</head>
+<body style="">
+
+<input type="text" value="1 2 3 4 5 10 15 19" style="width: 250px;" id="input_num">输入数字求和，数字间以空格隔开<br><button>计算</button>
+<p>输入框能自动删除输入的非数字</p>
+<script type="text/javascript" src="jquery-1.12.3.js"></script>
+<script type="text/javascript">
+  var input_num = document.getElementById('input_num');
+
+  input_num.onkeyup = function(){
+    this.value = this.value.replace(/[^\d ]/,"");
+  }
+  
+  var button = document.getElementsByTagName('button')[0];
+  button.onclick = function(){
+    var value = input_num.value;
+    var arr = value.split(" "); 
+    var sum = 0;
+
+    for (var i=0;i<arr.length;i++) {
+      var index = Number(arr[i]); 
+      sum = sum + index;
+    }
+    alert(sum);
+  }
+
+  
+
+</script>
+</body>
+</html> 
