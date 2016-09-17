@@ -1,0 +1,136 @@
+<html>
+<head>
+<meta charset="UTF-8">
+  <title>confirm和弹出层效果</title>
+  <style type="text/css">
+  * {margin: 0;padding: 0;}
+  form {width: 500px;margin: 0 auto;display: block;}
+   #backg {width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 9;
+    background: #000;opacity: 0.15;filter: alpha(opacity=15);} 
+    #pop_content {width: 400px;height:200px;position: absolute;margin:auto;left:0;right:0;top:0;bottom: 0;background: #fff;border: 4px solid rgba(0,0,0,0.1);z-index: 10;}
+    #pop_content h4 {padding-left: 10px;height: 30px;line-height: 30px;}
+    #pop_content h4 span {top: 5px;right: 10px;position: absolute;cursor: pointer;padding: 2px;border: 1px solid #eee;line-height: 15px;}
+    #pop_content .details {margin-top: 30px;text-align: center;}
+    #pop_content .details p {padding: 10px 0;}
+  </style>
+
+</head>
+<body style="">
+<form>
+<label for=""><input type="checkbox" name="checkedAll">全选/全不选</label>
+<ul>
+<li><label><input type="checkbox" name="mail">来自小明1</label></li>
+<li><label><input type="checkbox" name="mail">来自小东2</label></li>
+<li><label><input type="checkbox" name="mail">来自小东3</label></li>
+<li><label><input type="checkbox" name="mail">来自小东4</label></li>
+<li><label><input type="checkbox" name="mail">来自小军5</label></li>
+<li><label><input type="checkbox" name="mail">来自小军6</label></li>
+<li><label><input type="checkbox" name="mail">来自小军7</label></li>
+<li><label><input type="checkbox" name="mail">来自小军8</label></li>
+</ul>
+<a href="javascript:;">删除邮件</a>
+<a href="javascript:;">删除效果2弹出层</a>
+</form>
+<div id="backg" style="display: none;"></div>
+<div id="pop_content" style="display: none;">
+  <h4>提示<span id="close">X</span></h4>
+  <div class="details">
+    <p>确认删除?</p>
+    <p>
+      <a href="javascript:;">删除</a>
+      <a href="javascript:;">取消</a>
+    </p>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var labels = document.getElementsByTagName('input');
+  var ul = document.getElementsByTagName('ul')[0];
+  var checkedAll = labels[0];
+  checkedAll.onclick = function(){
+    if (this.checked) {
+      for (var i = 1; i < labels.length; i++) {
+        labels[i].checked = true;
+      }
+   
+    } else {
+        for (var i = 1; i < labels.length; i++) {
+          labels[i].checked = false;
+        }
+    }
+  } 
+  var olink = document.getElementsByTagName('a')[0];
+  olink.onclick = function(){
+    if (noSelected() == false){
+
+      return;
+    }
+    if (confirm("你确认删除吗")) {
+      for (var i = labels.length-1; i > 0; i--) {
+        if (labels[i].checked) {
+          // var grandpa = labels[i].parentNode.parentNode.parentNode;
+          var parent = labels[i].parentNode.parentNode;
+          // parent.style.display = "none";
+          ul.removeChild(parent);
+        }
+      }
+    }
+
+    
+  }
+  var n = 0;
+
+  function noSelected() {
+    for (var i = 1; i < labels.length; i++) {
+      if (labels[i].checked == true) {
+        n = n + 1;
+      }      
+    }
+    if (n==0) {
+      alert("请选择你要删除的邮件");
+      return false;
+    } 
+  }
+ var links = document.getElementsByTagName('a')[1];
+ var deleteBtn = document.getElementsByTagName('a')[2];
+ var cancel = document.getElementsByTagName('a')[3];
+ var backg = document.getElementById('backg');
+ var pop_content = document.getElementById('pop_content');
+ var close = document.getElementById('close');
+ links.onclick = function () {
+  if (noSelected() == false){
+
+    return;
+  }
+    pop_content.style.display = "block";
+    backg.style.display = "block";
+
+ }
+ close.onclick = function () {
+    pop_content.style.display = "none";
+    backg.style.display = "none";
+
+ }
+ deleteBtn.onclick = function () {
+   for (var i = labels.length-1; i > 0; i--) {
+     if (labels[i].checked) {
+       // var grandpa = labels[i].parentNode.parentNode.parentNode;
+       var parent = labels[i].parentNode.parentNode;
+       // parent.style.display = "none";
+       ul.removeChild(parent);
+     }
+   }
+   pop_content.style.display = "none";
+   backg.style.display = "none"
+ }
+ cancel.onclick = function () {
+    pop_content.style.display = "none";
+    backg.style.display = "none";
+    
+
+ }
+</script>
+
+
+</body>
+</html> 
