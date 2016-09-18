@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取验证码效果及验证码的产生</title>
+  <style type="text/css">
+    a {display: inline-block;width: 150px;height: 30px;background: linear-gradient(to bottom,#fcfcfc,#f2f2f2);text-decoration: none;line-height: 30px;text-align: center;margin-left: 10px;    border: 1px solid #d9d9d9;color: #666;}
+  </style>
+</head>
+<body>
+<input type="text" id="txt">
+<a id="getButton" href="javascript:;">获取验证码</a>
+
+
+	<script type="text/javascript">
+	
+	window.onload=function(){
+      // var timer = setTimeout(getCode,2000);
+      function getRandom(istart, iend){
+              var iChoice = iend - istart +1;
+              return Math.floor(Math.random() * iChoice + istart);
+      }
+      function getCode(){        
+      var iArray = [];
+        
+        for(var i=0; i<6; i++){
+                iArray.push(getRandom(0,9));
+
+        }
+        var st = iArray.join("");
+        return st;
+      }
+      
+      var getButton = document.getElementById('getButton');
+      var txt = document.getElementById('txt');
+      var animated = true;
+      getButton.onclick = function(){
+        if (!animated) {
+          return;
+
+        }
+        txt.value = getCode();
+
+        animated = false;
+        this.firstChild.nodeValue = "60秒后重新换取";
+        this.style.cursor = "not-allowed";
+        var that = this;
+        var timer2 = setInterval(function(){
+          var timeNum = parseInt(that.firstChild.nodeValue);
+          timeNum--;
+          if (timeNum==0){
+          that.firstChild.nodeValue = "获取验证码";
+            clearInterval(timer2);
+            that.style.cursor = "pointer";
+            animated = true;
+            return;
+          }
+          that.firstChild.nodeValue = timeNum + "秒后重新换取";
+        },1000)
+      }
+     
+      
+
+
+	};
+
+   
+	</script>
+</body>
+</html>
