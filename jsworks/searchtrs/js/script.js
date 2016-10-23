@@ -12,15 +12,12 @@ window.onload = function(){
       if (labels[0].getElementsByTagName("input")[0].checked == "true") {
         return false;
       }
-      link_search.setAttribute("href","https://www.baidu.com/index.php?tn=monline_3_dg")
       engine_img.setAttribute("src","images/baidu_web.png");
     }
     labels[1].onclick = function(){
       if (labels[1].getElementsByTagName("input")[0].checked == "true") {
         return false;
       }
-
-      link_search.setAttribute("href","https://www.google.com/")
       engine_img.setAttribute("src","images/google_web-444.png");
       // alert(1);
     }
@@ -28,7 +25,6 @@ window.onload = function(){
       if (labels[2].getElementsByTagName("input")[0].checked == "true") {
         return false;
       }
-      link_search.setAttribute("href","http://ai.taobao.com/?pid=mm_28347190_2425761_13466329")
       engine_img.setAttribute("src","images/taobao_shopping-446.png");
     }
   }
