@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 <head>
 <meta charset="UTF-8">
   <title>Document</title>
@@ -35,5 +35,62 @@ display: inline-block;
 </script>
 </body>
 </html> 
+ -->
 
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="UTF-8">
+     <title></title>
+     <style type="text/css">
+         .con {
+             width: 200px;
+             height: 200px;
+             background: red;
+         }
+         .tou {
+             width: 200px;
+             height: 30px;
+             line-height: 30px;
+             background: #a7cbff;
+         }
+         .tou button {
+             float: left;
+         }
+         .tou .ret {
+             float: right;
+         }
+     </style>
+     <script type="text/javascript">
 
+         // 定义vote函数，计算票数
+
+         // 定义disabled函数，禁用投票按钮
+         var animated = false;
+         function vote(element){
+            if (animated) {
+              return;
+            }
+            animated = true;
+             var total = document.getElementById('total');
+             var oldNum = parseInt(total.firstChild.nodeValue);
+             total.firstChild.nodeValue = oldNum + 1;
+             element.disabled = false;
+             var timer = setTimeout(function(){
+                 element.disabled = true;
+                 animated = false;
+             },1000);
+         }
+         
+        
+
+     </script>
+ </head>
+ <body>
+ <div class="con">投票内容</div>
+ <div class="tou">
+     <button onclick="vote(this)">投票</button>
+     <span class="ret">总票数：<span id="total">0</span></span>
+ </div>
+ </body>
+ </html>
