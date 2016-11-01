@@ -1,96 +1,47 @@
-<!-- <html>
-<head>
-<meta charset="UTF-8">
-  <title>Document</title>
-  <style type="text/css">
-  </style>
-  <style type="text/css">
-  @font-face {
-    font-family: 'iconfont';
-    src: url('//at.alicdn.com/t/font_1476755144_1517742.eot'); /* IE9*/
-    src: url('//at.alicdn.com/t/font_1476755144_1517742.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('//at.alicdn.com/t/font_1476755144_1517742.woff') format('woff'), /* chrome、firefox */
-    url('//at.alicdn.com/t/font_1476755144_1517742.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-    url('//at.alicdn.com/t/font_1476755144_1517742.svg#iconfont') format('svg'); /* iOS 4.1- */
-  }
-                      
-  .iconfont{}
-  .iconfont{
-font-family:"iconfont";
-font-size:16px;
-font-style:normal;
-display: inline-block;
-}
-}
-                    
-  </style>
-
-</head>
-<p><i class="iconfont">&#xe600;</i></p>
-<p><i class="iconfont">&#xe601;</i></p>
-
-<script type="text/javascript" src="jquery-1.12.3.js"></script>
-<script>
-
-</script>
-</body>
-</html> 
- -->
-
- <!DOCTYPE html>
- <html>
+<html>
  <head>
-     <meta charset="UTF-8">
-     <title></title>
-     <style type="text/css">
-         .con {
-             width: 200px;
-             height: 200px;
-             background: red;
-         }
-         .tou {
-             width: 200px;
-             height: 30px;
-             line-height: 30px;
-             background: #a7cbff;
-         }
-         .tou button {
-             float: left;
-         }
-         .tou .ret {
-             float: right;
-         }
-     </style>
-     <script type="text/javascript">
+ <script type="text/javascript">
+ function getCookie(c_name)
+ {
+ if (document.cookie.length>0)
+   {
+   c_start=document.cookie.indexOf(c_name + "=")
+   if (c_start!=-1)
+     { 
+     c_start=c_start + c_name.length+1 
+     c_end=document.cookie.indexOf(";",c_start)
+     if (c_end==-1) c_end=document.cookie.length
+     return unescape(document.cookie.substring(c_start,c_end))
+     } 
+   }
+ return ""
+ }
 
-         // 定义vote函数，计算票数
+ function setCookie(c_name,value,expiredays)
+ {
+ var exdate=new Date()
+ exdate.setDate(exdate.getDate()+expiredays)
+ document.cookie=c_name+ "=" +escape(value)+
+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+ }
 
-         // 定义disabled函数，禁用投票按钮
-         var animated = false;
-         function vote(element){
-            if (animated) {
-              return;
-            }
-            animated = true;
-             var total = document.getElementById('total');
-             var oldNum = parseInt(total.firstChild.nodeValue);
-             total.firstChild.nodeValue = oldNum + 1;
-             element.disabled = false;
-             var timer = setTimeout(function(){
-                 element.disabled = true;
-                 animated = false;
-             },1000);
-         }
-         
-        
-
-     </script>
+ function checkCookie()
+ {
+ username=getCookie('username')
+ if (username!=null && username!="")
+   {alert('Welcome again '+username+'!')}
+ else 
+   {
+   username=prompt('Please enter your name:',"")
+   if (username!=null && username!="")
+     {
+     setCookie('username',username,365)
+     }
+   }
+ }
+ </script>
  </head>
- <body>
- <div class="con">投票内容</div>
- <div class="tou">
-     <button onclick="vote(this)">投票</button>
-     <span class="ret">总票数：<span id="total">0</span></span>
- </div>
+
+ <body onLoad="checkCookie()">
  </body>
  </html>
